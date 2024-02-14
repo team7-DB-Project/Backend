@@ -21,6 +21,7 @@ public class StoreController {
     @PostMapping("/store")
     public ResponseEntity<String> InsertStore(@RequestBody StoreReqInfo storeReqInfo) throws IOException {
         return ResponseEntity.ok(storeService.insertStore(storeReqInfo));
+
     }
 
     /**
