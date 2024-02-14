@@ -21,6 +21,7 @@ public class StoreController {
     @PostMapping("/store")
     public ResponseEntity<String> InsertStore(@RequestBody StoreReqInfo storeReqInfo) throws IOException {
         return ResponseEntity.ok(storeService.insertStore(storeReqInfo));
+
     }
 
     /**
@@ -43,6 +44,6 @@ public class StoreController {
      * 매출 순위 Top 3 조회
      */
 
-    /*assdasdd*/
+
 
 }
