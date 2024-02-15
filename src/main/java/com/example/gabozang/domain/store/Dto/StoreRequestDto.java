@@ -16,6 +16,5 @@ public class StoreRequestDto {
         private double rating;
         private String imageUrl;
         private String phoneNumber;
-        private int totalSales;
     }
 }

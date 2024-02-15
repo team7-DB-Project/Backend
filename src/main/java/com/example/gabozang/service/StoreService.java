@@ -2,7 +2,7 @@ package com.example.gabozang.service;
 
 
 import com.example.gabozang.domain.store.Dto.StoreRequestDto.StoreReqInfo;
-import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreReSInfo;
+import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreResInfo;
 import com.example.gabozang.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,11 +18,18 @@ public class StoreService {
        return storeRepository.insertStore(storeReqInfo);
     }
 
-    public List<StoreReSInfo> selectAllStore() {
+    public List<StoreResInfo> selectAllStore() {
         return storeRepository.selectAllStore();
     }
 
-    public StoreReSInfo selectStoreById(int storeId) {
+    public StoreResInfo selectStoreById(int storeId) {
         return storeRepository.selectStoreById(storeId);
     }
+    public int updateStoreById(int storeId, StoreReqInfo storeReqInfo) {
+        return storeRepository.updateStoreInfo(storeId, storeReqInfo);
+    }
+    public List<StoreResInfo> selectAllStoreTop3() {
+        return storeRepository.selectStoreTop3();
+    }
+
 }
