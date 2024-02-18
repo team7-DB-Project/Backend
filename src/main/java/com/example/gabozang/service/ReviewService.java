@@ -24,4 +24,6 @@ public class ReviewService {
     public ReviewResInfo selectReviewById(int reviewId) {
         return reviewRepository.selectReviewById(reviewId);
     }
+
+    public ReviewResInfo selectReviewByStoreId(int storeId) { return reviewRepository.selectReviewByStoreId(storeId); }
 }
