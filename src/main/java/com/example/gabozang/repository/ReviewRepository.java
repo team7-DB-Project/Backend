@@ -2,6 +2,7 @@ package com.example.gabozang.repository;
 
 import com.example.gabozang.domain.review.Dto.ReviewRequestDto.ReviewReqInfo;
 import com.example.gabozang.domain.review.Dto.ReviewResponseDto.ReviewResInfo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,10 +19,14 @@ public class ReviewRepository {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    @Transactional
     public String insertReview(ReviewReqInfo reviewReqInfo){
-        String createReviewQuery = "insert into review (store_id, content, rating) VALUES (?,?,?)"; // 실행될 동적 쿼리문
-        Object[] createUserParams = new Object[]{reviewReqInfo.getStoreId(), reviewReqInfo.getContent(), reviewReqInfo.getRating()};
-        this.jdbcTemplate.update(createReviewQuery, createUserParams);
+        String createReviewQuery = "insert into review (store_id, content, rating, created_at, updated_at) VALUES (?,?,?,?,?)"; // 실행될 동적 쿼리문
+        Object[] createReviewParams = new Object[]{reviewReqInfo.getStoreId(), reviewReqInfo.getContent(), reviewReqInfo.getRating(),LocalDateTime.now(),LocalDateTime.now()};
+        this.jdbcTemplate.update(createReviewQuery, createReviewParams);
+        String updateStoreRatingQuery="update store set rating=(select avg(rating) from review where store_id=?) where store_id=?";
+        Object[] updateStoreRatingParams = new Object[]{reviewReqInfo.getStoreId(),reviewReqInfo.getStoreId()};
+        this.jdbcTemplate.update(updateStoreRatingQuery,updateStoreRatingParams);
         return "리뷰 정보 저장 완료";
     }
 
