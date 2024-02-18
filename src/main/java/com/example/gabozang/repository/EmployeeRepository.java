@@ -66,4 +66,10 @@ public class EmployeeRepository {
         this.jdbcTemplate.update(updateEmployeeQuery,modifyEmployeeIdParams);
         return "사원 정보 수정 완료";
     }
+
+    public int countAllEmployee() {
+        String countEmployeeQuery = "select count(*) from employee";
+        return this.jdbcTemplate.queryForObject(countEmployeeQuery, Integer.class);
+    }
+
 }

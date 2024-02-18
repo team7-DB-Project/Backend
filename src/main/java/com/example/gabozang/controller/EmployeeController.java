@@ -12,27 +12,37 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    @PostMapping("/employee")
+    @PostMapping("")
     public ResponseEntity<String> InsertEmployee(@RequestBody EmployeeRequestDto.EmployeeReqInfo employeeReqInfo) throws IOException {
         return ResponseEntity.ok(employeeService.insertEmployee(employeeReqInfo));
     }
 
-    @GetMapping("/employee")
+    @GetMapping("")
     public ResponseEntity<List<EmployeeResponseDto.EmployeeResInfo>> SelectAllEmployee() throws IOException {
         return ResponseEntity.ok(employeeService.selectAllEmployee());
     }
 
-    @GetMapping("/employee/{employeeId}")
+    @GetMapping("/{employeeId}")
     public ResponseEntity<EmployeeResponseDto.EmployeeResInfo> SelectEmployeeById(@PathVariable int employeeId) throws IOException {
         return ResponseEntity.ok(employeeService.selectEmployeeById(employeeId));
     }
 
-    @PostMapping("/employee/{employeeId}")
+    @PostMapping("/{employeeId}")
     public ResponseEntity<String> updateEmployeeById(@PathVariable int employeeId, @RequestBody EmployeeRequestDto.EmployeeReqInfo employeeReqInfo) {
         return ResponseEntity.ok(employeeService.updateEmployeeById(employeeId,employeeReqInfo));
     }
+
+    /**
+     *  총 직원 수
+     */
+    @GetMapping("/count")
+    public ResponseEntity<Integer> countAllEmployee() {
+        return ResponseEntity.ok(employeeService.countAllEmployee());
+    }
+
 
 }

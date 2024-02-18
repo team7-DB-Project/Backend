@@ -27,4 +27,8 @@ public class EmployeeService {
     public String updateEmployeeById(int employeeId, EmployeeRequestDto.EmployeeReqInfo employeeReqInfo) {
         return employeeRepository.updateEmployeeById(employeeId,employeeReqInfo);
     }
+
+    public Integer countAllEmployee() {
+        return employeeRepository.countAllEmployee();
+    }
 }
