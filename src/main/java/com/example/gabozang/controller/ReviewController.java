@@ -29,4 +29,10 @@ public class ReviewController {
     public ResponseEntity<ReviewResInfo> SelectReviewById(@PathVariable int reviewId) throws IOException {
         return ResponseEntity.ok(reviewService.selectReviewById(reviewId));
     }
+
+    @GetMapping("review/{storeId}")
+    public ResponseEntity<ReviewResInfo> SelectReviewByStoreId(@PathVariable int storeId) throws IOException {
+        return ResponseEntity.ok(reviewService.selectReviewByStoreId(storeId));
+    }
+
 }

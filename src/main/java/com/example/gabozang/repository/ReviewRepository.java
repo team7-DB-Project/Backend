@@ -56,4 +56,18 @@ public class ReviewRepository {
                 review_id
         );
     }
+
+    public ReviewResInfo selectReviewByStoreId(int storeId) {
+        String selectReviewQuery = "select * from review where store_id = ?";
+        return this.jdbcTemplate.queryForObject(selectReviewQuery,
+                (rs, rowNum) -> new ReviewResInfo(
+                        rs.getInt("review_id"),
+                        rs.getInt("store_id"),
+                        rs.getString("content"),
+                        rs.getDouble("rating"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()),
+                storeId
+        );
+    }
 }

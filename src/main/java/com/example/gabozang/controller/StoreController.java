@@ -41,7 +41,7 @@ public class StoreController {
     }
 
     /**
-     * 업데이트
+     * 특정 점포 정보 수정
      */
     @PostMapping("/store/{storeId}")
     public ResponseEntity<Integer> updateStoreById(@PathVariable int storeId, @RequestBody StoreReqInfo storeReqInfo) {
@@ -49,12 +49,13 @@ public class StoreController {
     }
 
     /**
-     * Top3 출력
+     * 평점이 좋은 Top3 점포 출력
      */
     @GetMapping("/store/top3")
     public ResponseEntity<List<StoreResInfo>> selectStoreByIdTop3() {
         return ResponseEntity.ok(storeService.selectAllStoreTop3());
     }
+
 
 
 
