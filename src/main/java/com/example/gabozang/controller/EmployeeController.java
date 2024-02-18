@@ -29,4 +29,9 @@ public class EmployeeController {
     public ResponseEntity<EmployeeResponseDto.EmployeeResInfo> SelectEmployeeById(@PathVariable int employeeId) throws IOException {
         return ResponseEntity.ok(employeeService.selectEmployeeById(employeeId));
     }
+
+    @PostMapping("/employee/{employeeId}")
+    public ResponseEntity<String> updateEmployeeById(@PathVariable int employeeId, @RequestBody EmployeeRequestDto.EmployeeReqInfo employeeReqInfo) {
+        return ResponseEntity.ok(employeeService.updateEmployeeById(employeeId,employeeReqInfo));
+    }
 }

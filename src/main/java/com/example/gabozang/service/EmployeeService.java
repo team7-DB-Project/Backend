@@ -23,4 +23,8 @@ public class EmployeeService {
     public EmployeeResponseDto.EmployeeResInfo selectEmployeeById(int employeeId) {
         return employeeRepository.selectEmployeeById(employeeId);
     }
+
+    public String updateEmployeeById(int employeeId, EmployeeRequestDto.EmployeeReqInfo employeeReqInfo) {
+        return employeeRepository.updateEmployeeById(employeeId,employeeReqInfo);
+    }
 }
