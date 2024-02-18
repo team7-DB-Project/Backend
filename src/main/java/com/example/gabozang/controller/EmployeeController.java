@@ -34,4 +34,5 @@ public class EmployeeController {
     public ResponseEntity<String> updateEmployeeById(@PathVariable int employeeId, @RequestBody EmployeeRequestDto.EmployeeReqInfo employeeReqInfo) {
         return ResponseEntity.ok(employeeService.updateEmployeeById(employeeId,employeeReqInfo));
     }
+
 }
