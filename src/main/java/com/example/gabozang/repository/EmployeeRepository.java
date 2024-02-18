@@ -2,8 +2,7 @@ package com.example.gabozang.repository;
 
 import com.example.gabozang.domain.employee.Dto.EmployeeRequestDto;
 import com.example.gabozang.domain.employee.Dto.EmployeeResponseDto;
-import com.example.gabozang.domain.paymentHisotry.Dto.PaymentHistoryRequestDto;
-import com.example.gabozang.domain.paymentHisotry.Dto.PaymentHistoryResponseDto;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -23,8 +22,8 @@ public class EmployeeRepository {
 
     public String insertEmployee(EmployeeRequestDto.EmployeeReqInfo employeeReqInfo){
         String createEmployeeQuery = "insert into employee (store_id, name, phone_number, years_of_service, employment_type, salary, manager_id) VALUES (?,?,?,?,?,?,?)"; // 실행될 동적 쿼리문
-        Object[] createUserParams = new Object[]{employeeReqInfo.getStoreId(), employeeReqInfo.getName(), employeeReqInfo.getPhoneNumber(), employeeReqInfo.getYears_of_service(), employeeReqInfo.getEmploymentType(), employeeReqInfo.getSalary(), employeeReqInfo.getManagerId()};
-        this.jdbcTemplate.update(createEmployeeQuery, createUserParams);
+        Object[] createEmployeeParams = new Object[]{employeeReqInfo.getStoreId(), employeeReqInfo.getName(), employeeReqInfo.getPhoneNumber(), employeeReqInfo.getYearsOfService(), employeeReqInfo.getEmploymentType(), employeeReqInfo.getSalary(), employeeReqInfo.getManagerId()};
+        this.jdbcTemplate.update(createEmployeeQuery, createEmployeeParams);
         return "사원 정보 저장 완료";
     }
 
@@ -57,5 +56,14 @@ public class EmployeeRepository {
                         rs.getInt("manager_id")),
                 employee_id
         );
+    }
+
+    @Transactional
+    public String updateEmployeeById(int employeeId, EmployeeRequestDto.EmployeeReqInfo employeeReqInfo) {
+        String updateEmployeeQuery="update employee set store_id=?, name=?, phone_number=?, years_of_service=?, salary=?, manager_id=? where employee_id=?";
+        Object[] modifyEmployeeIdParams=new Object[]{employeeReqInfo.getStoreId(), employeeReqInfo.getName(), employeeReqInfo.getPhoneNumber(), employeeReqInfo.getYearsOfService(),
+                employeeReqInfo.getSalary(), employeeReqInfo.getManagerId(), employeeId};
+        this.jdbcTemplate.update(updateEmployeeQuery,modifyEmployeeIdParams);
+        return "사원 정보 수정 완료";
     }
 }

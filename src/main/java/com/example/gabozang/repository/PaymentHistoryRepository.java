@@ -22,8 +22,8 @@ public class PaymentHistoryRepository {
 
     public String insertPaymentHistory(PaymentHistoryRequestDto.PaymentHistoryReqInfo paymentHistoryReqInfo){
         String createPaymentHistoryQuery = "insert into payment_history (sales, payment_id) VALUES (?,?)"; // 실행될 동적 쿼리문
-        Object[] createUserParams = new Object[]{paymentHistoryReqInfo.getSales(), paymentHistoryReqInfo.getPaymentId()};
-        this.jdbcTemplate.update(createPaymentHistoryQuery, createUserParams);
+        Object[] createPaymentHistoryParams = new Object[]{paymentHistoryReqInfo.getSales(), paymentHistoryReqInfo.getPaymentId()};
+        this.jdbcTemplate.update(createPaymentHistoryQuery, createPaymentHistoryParams);
         return "리뷰 정보 저장 완료";
     }
 
