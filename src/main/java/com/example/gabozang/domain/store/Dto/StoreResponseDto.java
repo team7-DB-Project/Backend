@@ -8,7 +8,7 @@ public class StoreResponseDto {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class StoreReSInfo {
+    public static class StoreResInfo {
         private int id;
         private String name;
         private String location;
@@ -16,6 +16,5 @@ public class StoreResponseDto {
         private double rating;
         private String imageUrl;
         private String phoneNumber;
-        private int totalSales;
     }
 }
