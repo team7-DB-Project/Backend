@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -21,8 +22,8 @@ public class PaymentHistoryRepository {
     }
 
     public String insertPaymentHistory(PaymentHistoryRequestDto.PaymentHistoryReqInfo paymentHistoryReqInfo){
-        String createPaymentHistoryQuery = "insert into payment_history (sales, payment_id) VALUES (?,?)"; // 실행될 동적 쿼리문
-        Object[] createPaymentHistoryParams = new Object[]{paymentHistoryReqInfo.getSales(), paymentHistoryReqInfo.getPaymentId()};
+        String createPaymentHistoryQuery = "insert into payment_history (sales, payment_id, store_id,created_at, updated_at) VALUES (?,?,?,?,?)"; // 실행될 동적 쿼리문
+        Object[] createPaymentHistoryParams = new Object[]{paymentHistoryReqInfo.getSales(), paymentHistoryReqInfo.getPaymentId(),paymentHistoryReqInfo.getStoreId(), LocalDateTime.now(),LocalDateTime.now()};
         this.jdbcTemplate.update(createPaymentHistoryQuery, createPaymentHistoryParams);
         return "리뷰 정보 저장 완료";
     }
