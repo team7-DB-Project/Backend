@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -21,9 +22,9 @@ public class StoreRepository {
     }
 
     public String insertStore(StoreReqInfo storeReqInfo){
-        String createStoreQuery = "insert into store (name, location, maximum_capacity, rating,image_url, phone_number) VALUES (?,?,?,?,?,?)"; // 실행될 동적 쿼리문
+        String createStoreQuery = "insert into store (name, location, maximum_capacity, rating,image_url, phone_number,created_at, updated_at) VALUES (?,?,?,?,?,?,?,?)"; // 실행될 동적 쿼리문
         Object[] createUserParams = new Object[]{storeReqInfo.getName(), storeReqInfo.getLocation(), storeReqInfo.getMaximumCapacity(), storeReqInfo.getRating(), storeReqInfo.getImageUrl(),
-                storeReqInfo.getPhoneNumber()};
+                storeReqInfo.getPhoneNumber(), LocalDateTime.now(),LocalDateTime.now()};
         this.jdbcTemplate.update(createStoreQuery, createUserParams);
         return "점포 정보 저장 완료";
     }
@@ -64,10 +65,10 @@ public class StoreRepository {
     @Transactional
     public int updateStoreInfo(int storeId, StoreReqInfo storeReqInfo) {
         String updateStoreQuery = "update store set name = ?, location = ?, maximum_capacity = ?, rating = ?, image_url = ?," +
-                " phone_number = ? where store_id = ?";
+                " phone_number = ?, updated_at=? where store_id = ?";
         Object[] modifyStoreIdParams = new Object[]{storeReqInfo.getName(), storeReqInfo.getLocation(),
                 storeReqInfo.getMaximumCapacity(), storeReqInfo.getRating(), storeReqInfo.getImageUrl(),
-                storeReqInfo.getPhoneNumber(), storeId};
+                storeReqInfo.getPhoneNumber(),LocalDateTime.now(), storeId};
 
         return this.jdbcTemplate.update(updateStoreQuery, modifyStoreIdParams);
     }

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -21,8 +22,8 @@ public class EmployeeRepository {
     }
 
     public String insertEmployee(EmployeeReqInfo employeeReqInfo){
-        String createEmployeeQuery = "insert into employee (store_id, name, phone_number, years_of_service, employment_type, salary, manager_id) VALUES (?,?,?,?,?,?,?)"; // 실행될 동적 쿼리문
-        Object[] createEmployeeParams = new Object[]{employeeReqInfo.getStoreId(), employeeReqInfo.getName(), employeeReqInfo.getPhoneNumber(), employeeReqInfo.getYearsOfService(), employeeReqInfo.getEmploymentType(), employeeReqInfo.getSalary(), employeeReqInfo.getManagerId()};
+        String createEmployeeQuery = "insert into employee (store_id, name, phone_number, years_of_service, employment_type, salary, manager_id,created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?)"; // 실행될 동적 쿼리문
+        Object[] createEmployeeParams = new Object[]{employeeReqInfo.getStoreId(), employeeReqInfo.getName(), employeeReqInfo.getPhoneNumber(), employeeReqInfo.getYearsOfService(), employeeReqInfo.getEmploymentType(), employeeReqInfo.getSalary(), employeeReqInfo.getManagerId(), LocalDateTime.now(),LocalDateTime.now()};
         this.jdbcTemplate.update(createEmployeeQuery, createEmployeeParams);
         return "사원 정보 저장 완료";
     }
@@ -64,9 +65,9 @@ public class EmployeeRepository {
 
     @Transactional
     public String updateEmployeeById(int employeeId, EmployeeReqInfo employeeReqInfo) {
-        String updateEmployeeQuery="update employee set store_id=?, name=?, phone_number=?, years_of_service=?, salary=?, manager_id=? where employee_id=?";
+        String updateEmployeeQuery="update employee set store_id=?, name=?, phone_number=?, years_of_service=?, salary=?, manager_id=?,updated_at=? where employee_id=?";
         Object[] modifyEmployeeIdParams=new Object[]{employeeReqInfo.getStoreId(), employeeReqInfo.getName(), employeeReqInfo.getPhoneNumber(), employeeReqInfo.getYearsOfService(),
-                employeeReqInfo.getSalary(), employeeReqInfo.getManagerId(), employeeId};
+                employeeReqInfo.getSalary(), employeeReqInfo.getManagerId(),LocalDateTime.now(), employeeId};
         this.jdbcTemplate.update(updateEmployeeQuery,modifyEmployeeIdParams);
         return "사원 정보 수정 완료";
     }
