@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 public class StoreResponseDto {
     @Getter
     @NoArgsConstructor
@@ -16,5 +18,7 @@ public class StoreResponseDto {
         private double rating;
         private String imageUrl;
         private String phoneNumber;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
     }
 }

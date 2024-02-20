@@ -32,9 +32,11 @@ public class PaymentHistoryRepository {
         return this.jdbcTemplate.query(selectPaymentHistoryQuery,
                 (rs, rowNum) -> new PaymentHistoryResponseDto.PaymentHistoryResInfo(
                         rs.getInt("payment_history_id"),
-                        rs.getTimestamp("date").toLocalDateTime(),
+                        rs.getInt("store_id"),
                         rs.getInt("sales"),
-                        rs.getInt("payment_id")
+                        rs.getInt("payment_id"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
                 ));
     }
 
@@ -43,9 +45,11 @@ public class PaymentHistoryRepository {
         return this.jdbcTemplate.queryForObject(selectPaymentHistoryQuery,
                 (rs, rowNum) -> new PaymentHistoryResponseDto.PaymentHistoryResInfo(
                         rs.getInt("payment_history_id"),
-                        rs.getTimestamp("date").toLocalDateTime(),
+                        rs.getInt("store_id"),
                         rs.getInt("sales"),
-                        rs.getInt("payment_id")),
+                        rs.getInt("payment_id"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()),
                 payment_history_id
         );
     }

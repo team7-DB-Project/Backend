@@ -38,7 +38,9 @@ public class StoreRepository {
                         rs.getInt("maximum_capacity"),
                         rs.getDouble("rating"),
                         rs.getString("image_url"),
-                        rs.getString("phone_number")
+                        rs.getString("phone_number"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
                 ));
     }
 
@@ -52,7 +54,9 @@ public class StoreRepository {
                         rs.getInt("maximum_capacity"),
                         rs.getDouble("rating"),
                         rs.getString("image_url"),
-                        rs.getString("phone_number")),
+                        rs.getString("phone_number"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()),
                     store_id
                 );
     }
@@ -78,7 +82,9 @@ public class StoreRepository {
                         rs.getInt("maximum_capacity"),
                         rs.getDouble("rating"),
                         rs.getString("image_url"),
-                        rs.getString("phone_number")
+                        rs.getString("phone_number"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
                 ));
     }
 
