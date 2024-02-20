@@ -12,4 +12,6 @@ public class Store {
     private String imageUrl;
     private String phoneNumber;
     private int totalSales;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

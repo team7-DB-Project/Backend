@@ -38,7 +38,9 @@ public class EmployeeRepository {
                         rs.getInt("years_of_service"),
                         rs.getString("employment_type"),
                         rs.getInt("salary"),
-                        rs.getInt("manager_id")
+                        rs.getInt("manager_id"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
                 ));
     }
 
@@ -53,7 +55,9 @@ public class EmployeeRepository {
                         rs.getInt("years_of_service"),
                         rs.getString("employment_type"),
                         rs.getInt("salary"),
-                        rs.getInt("manager_id")),
+                        rs.getInt("manager_id"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()),
                 employee_id
         );
     }
@@ -87,7 +91,9 @@ public class EmployeeRepository {
                         rs.getInt("years_of_service"),
                         rs.getString("employment_type"),
                         rs.getInt("salary"),
-                        rs.getInt("manager_id")
+                        rs.getInt("manager_id"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
                 ));
     }
 

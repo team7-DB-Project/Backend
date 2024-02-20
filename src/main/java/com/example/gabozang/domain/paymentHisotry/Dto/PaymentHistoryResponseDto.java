@@ -12,8 +12,10 @@ public class PaymentHistoryResponseDto {
     @AllArgsConstructor
     public static class PaymentHistoryResInfo {
         private int privateHistoryId;
-        private LocalDateTime date;
         private int sales;
         private int paymentId;
+        private int storeId;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
     }
 }

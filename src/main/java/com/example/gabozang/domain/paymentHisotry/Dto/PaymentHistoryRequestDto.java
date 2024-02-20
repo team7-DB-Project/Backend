@@ -14,5 +14,6 @@ public class PaymentHistoryRequestDto {
     public static class PaymentHistoryReqInfo {
         private int sales;
         private int paymentId;
+        private int storeId;
     }
 }
