@@ -1,6 +1,7 @@
 package com.example.gabozang.controller;
 
 import com.example.gabozang.domain.store.Dto.StoreRequestDto.StoreReqInfo;
+import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreRankInfo;
 import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreResInfo;
 import com.example.gabozang.service.StoreService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -63,8 +64,14 @@ public class StoreController {
         return ResponseEntity.ok(storeService.selectAllStoreTop3());
     }
 
-
-
+    /**
+     * 올해 점포 매출 순위
+     */
+    @GetMapping("/sales/rank")
+    @Operation(summary = "올해 점포 매출 순위")
+    public ResponseEntity<List<StoreRankInfo>> selectSalesRankStore() {
+        return ResponseEntity.ok(storeService.selectSalesRankStore());
+    }
 
 
 }
