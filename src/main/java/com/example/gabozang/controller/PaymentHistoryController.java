@@ -38,4 +38,10 @@ public class PaymentHistoryController {
     public ResponseEntity<PaymentHistoryResponseDto.PaymentHistoryResInfo> SelectPaymentHistoryById(@PathVariable int paymentHistoryId) throws IOException {
         return ResponseEntity.ok(paymentHistoryService.selectPaymentHistoryById(paymentHistoryId));
     }
+
+    @GetMapping("sums")
+    @Operation(summary = "총 매출액")
+    public ResponseEntity<Integer> selectAllSum() {
+        return ResponseEntity.ok(paymentHistoryService.selectAllSum());
+    }
 }
