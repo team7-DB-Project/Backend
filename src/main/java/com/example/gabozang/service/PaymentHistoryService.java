@@ -28,4 +28,8 @@ public class PaymentHistoryService {
     public PaymentHistoryResponseDto.PaymentHistoryResInfo selectPaymentHistoryById(int paymentHistoryId) {
         return paymentHistoryRepository.selectPaymentHistoryById(paymentHistoryId);
     }
+
+    public Integer selectAllSum() {
+        return paymentHistoryRepository.selectAllSum();
+    }
 }

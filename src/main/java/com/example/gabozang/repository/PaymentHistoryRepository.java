@@ -54,4 +54,9 @@ public class PaymentHistoryRepository {
                 payment_history_id
         );
     }
+
+    public Integer selectAllSum() {
+        String selectAllSum = "select SUM(sales) FROM payment_history";
+        return this.jdbcTemplate.queryForObject(selectAllSum, Integer.class);
+    }
 }
