@@ -32,4 +32,12 @@ public class PaymentHistoryService {
     public Integer selectAllSum() {
         return paymentHistoryRepository.selectAllSum();
     }
-}
+
+    public Integer selectYearAllSum() {
+        return paymentHistoryRepository.selectYearAllSum();
+    }
+
+    public Integer selectLastYearAllSum() {
+        return paymentHistoryRepository.selectLastYearAllSum();
+    }
+ }

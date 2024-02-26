@@ -59,4 +59,15 @@ public class PaymentHistoryRepository {
         String selectAllSum = "select SUM(sales) FROM payment_history";
         return this.jdbcTemplate.queryForObject(selectAllSum, Integer.class);
     }
+
+    public Integer selectYearAllSum() {
+        String selectYearAllSum = "SELECT SUM(sales) FROM payment_history "
+                + "WHERE YEAR(created_at) = YEAR(NOW()) ";
+        return this.jdbcTemplate.queryForObject(selectYearAllSum, Integer.class);
+    }
+    public Integer selectLastYearAllSum() {
+        String selectYearAllSum = "SELECT SUM(sales) FROM payment_history "
+                + "WHERE YEAR(created_at) = YEAR(NOW()) - 1 ";
+        return this.jdbcTemplate.queryForObject(selectYearAllSum, Integer.class);
+    }
 }
