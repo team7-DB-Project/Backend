@@ -28,6 +28,6 @@ public class StoreResponseDto {
     public static class StoreRankInfo {
         private int id;
         private String name;
-        private int sales;
+        private int sumSales;
     }
 }

@@ -25,5 +25,7 @@ public class ReviewService {
         return reviewRepository.selectReviewById(reviewId);
     }
 
-    public ReviewResInfo selectReviewByStoreId(int storeId) { return reviewRepository.selectReviewByStoreId(storeId); }
+    public List<ReviewResInfo> selectReviewByRating(int rating) {return reviewRepository.selectReviewByRating(rating);}
+
+    public List<ReviewResInfo> selectReviewByStoreId(int storeId) { return reviewRepository.selectReviewByStoreId(storeId); }
 }
