@@ -40,4 +40,12 @@ public class PaymentHistoryService {
     public Integer selectLastYearAllSum() {
         return paymentHistoryRepository.selectLastYearAllSum();
     }
+
+    public Integer selectTodaySum() {
+        return paymentHistoryRepository.selectTodaySum();
+    }
+
+    public Integer selectYesterdaySum() {
+        return paymentHistoryRepository.selectYesterdaySum();
+    }
  }
