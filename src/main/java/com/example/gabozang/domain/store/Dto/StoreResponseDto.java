@@ -21,4 +21,13 @@ public class StoreResponseDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class StoreRankInfo {
+        private int id;
+        private String name;
+        private int sumSales;
+    }
 }
