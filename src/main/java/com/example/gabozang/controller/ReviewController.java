@@ -35,10 +35,16 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.selectReviewById(reviewId));
     }
 
-    @GetMapping("/{storeId}")
+    @GetMapping("/store/{storeId}")
     @Operation(summary = "특정 점포 리뷰 조회")
-    public ResponseEntity<ReviewResInfo> SelectReviewByStoreId(@PathVariable int storeId) throws IOException {
+    public ResponseEntity<List<ReviewResInfo>> SelectReviewByStoreId(@PathVariable int storeId) throws IOException {
         return ResponseEntity.ok(reviewService.selectReviewByStoreId(storeId));
+    }
+
+    @GetMapping("/rating/{rating}")
+    @Operation(summary = "특정 점수 리뷰 조회")
+    public ResponseEntity<List<ReviewResInfo>> SelectReviewByRating(@PathVariable int rating) throws IOException {
+        return ResponseEntity.ok(reviewService.selectReviewByRating(rating));
     }
 
 }
