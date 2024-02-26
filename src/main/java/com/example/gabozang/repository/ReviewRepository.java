@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -57,9 +58,9 @@ public class ReviewRepository {
         );
     }
 
-    public ReviewResInfo selectReviewByStoreId(int storeId) {
+    public List<ReviewResInfo> selectReviewByStoreId(int storeId) {
         String selectReviewQuery = "select * from review where store_id = ?";
-        return this.jdbcTemplate.queryForObject(selectReviewQuery,
+        return this.jdbcTemplate.query(selectReviewQuery,
                 (rs, rowNum) -> new ReviewResInfo(
                         rs.getInt("review_id"),
                         rs.getInt("store_id"),
@@ -69,5 +70,18 @@ public class ReviewRepository {
                         rs.getTimestamp("updated_at").toLocalDateTime()),
                 storeId
         );
+    }
+
+    public List<ReviewResInfo> selectReviewByRating(int rating) {
+        String selectReviewQuery = "select * from review where rating = ?";
+        return this.jdbcTemplate.query(selectReviewQuery,
+                (rs, rowNum) -> new ReviewResInfo(
+                        rs.getInt("review_id"),
+                        rs.getInt("store_id"),
+                        rs.getString("content"),
+                        rs.getDouble("rating"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
+                ), rating);
     }
 }
