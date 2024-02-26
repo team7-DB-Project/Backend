@@ -68,4 +68,5 @@ public class PaymentHistoryController {
     public ResponseEntity<Integer> selectYesterdaySum() {
         return ResponseEntity.ok(paymentHistoryService.selectYesterdaySum());
     }
+
 }

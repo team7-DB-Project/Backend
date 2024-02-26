@@ -83,5 +83,4 @@ public class PaymentHistoryRepository {
         return this.jdbcTemplate.queryForObject(selectTodaySum, Integer.class);
     }
 
-
 }
