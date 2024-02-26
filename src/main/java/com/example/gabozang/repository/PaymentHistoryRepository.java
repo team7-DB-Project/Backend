@@ -54,4 +54,34 @@ public class PaymentHistoryRepository {
                 payment_history_id
         );
     }
+
+    public Integer selectAllSum() {
+        String selectAllSum = "select SUM(sales) FROM payment_history";
+        return this.jdbcTemplate.queryForObject(selectAllSum, Integer.class);
+    }
+
+    public Integer selectYearAllSum() {
+        String selectYearAllSum = "SELECT SUM(sales) FROM payment_history "
+                + "WHERE YEAR(created_at) = YEAR(NOW()) ";
+        return this.jdbcTemplate.queryForObject(selectYearAllSum, Integer.class);
+    }
+    public Integer selectLastYearAllSum() {
+        String selectYearAllSum = "SELECT SUM(sales) FROM payment_history "
+                + "WHERE YEAR(created_at) = YEAR(NOW()) - 1 ";
+        return this.jdbcTemplate.queryForObject(selectYearAllSum, Integer.class);
+    }
+
+    public Integer selectTodaySum() {
+        String selectTodaySum = "SELECT sum(sales) FROM payment_history "
+                + "WHERE DAY(created_at) = DAY(NOW()) ";
+        return this.jdbcTemplate.queryForObject(selectTodaySum, Integer.class);
+    }
+
+    public Integer selectYesterdaySum() {
+        String selectTodaySum = "SELECT sum(sales) FROM payment_history "
+                + "WHERE DAY(created_at) = DAY(NOW()) - 1";
+        return this.jdbcTemplate.queryForObject(selectTodaySum, Integer.class);
+    }
+
+
 }

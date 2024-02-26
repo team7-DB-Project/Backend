@@ -2,6 +2,7 @@ package com.example.gabozang.service;
 
 
 import com.example.gabozang.domain.store.Dto.StoreRequestDto.StoreReqInfo;
+import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreRankInfo;
 import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreResInfo;
 import com.example.gabozang.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,4 +33,7 @@ public class StoreService {
         return storeRepository.selectStoreTop3();
     }
 
+    public List<StoreRankInfo> selectSalesRankStore() {
+        return storeRepository.selectSalesRankStore();
+    }
 }

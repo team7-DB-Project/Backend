@@ -1,6 +1,7 @@
 package com.example.gabozang.repository;
 
 import com.example.gabozang.domain.store.Dto.StoreRequestDto.StoreReqInfo;
+import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreRankInfo;
 import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreResInfo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,4 +90,18 @@ public class StoreRepository {
                 ));
     }
 
+    public List<StoreRankInfo> selectSalesRankStore() {
+        String selectSalesRankStoreQuery = "SELECT s.store_id, s.name, SUM(ph.sales) as sum_sales FROM store as s JOIN payment_history as ph " +
+                " ON s.store_id = ph.store_id " +
+                " WHERE YEAR(ph.created_at) = YEAR(NOW()) " +
+                " GROUP BY s.store_id " +
+                " ORDER BY sum_sales DESC" +
+                " limit 3 ";
+        return this.jdbcTemplate.query(selectSalesRankStoreQuery,
+                (rs, rowNum) -> new StoreRankInfo(
+                        rs.getInt("store_id"),
+                        rs.getString("name"),
+                        rs.getInt("sum_sales")
+                ));
+    }
 }
