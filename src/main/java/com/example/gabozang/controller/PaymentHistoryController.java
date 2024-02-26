@@ -44,4 +44,28 @@ public class PaymentHistoryController {
     public ResponseEntity<Integer> selectAllSum() {
         return ResponseEntity.ok(paymentHistoryService.selectAllSum());
     }
+
+    @GetMapping("/year/sums")
+    @Operation(summary = "금년 총 매출액")
+    public ResponseEntity<Integer> selectAllYearSum() {
+        return ResponseEntity.ok(paymentHistoryService.selectYearAllSum());
+    }
+
+    @GetMapping("/lastYear/sums")
+    @Operation(summary = "작년 총 매출액")
+    public ResponseEntity<Integer> selectLastAllYearSum() {
+        return ResponseEntity.ok(paymentHistoryService.selectLastYearAllSum());
+    }
+
+    @GetMapping("/today/sum")
+    @Operation(summary = "금일 총 매출액")
+    public ResponseEntity<Integer> selectTodaySum() {
+        return ResponseEntity.ok(paymentHistoryService.selectTodaySum());
+    }
+
+    @GetMapping("/yesterday/sum")
+    @Operation(summary = "익일 총 매출액")
+    public ResponseEntity<Integer> selectYesterdaySum() {
+        return ResponseEntity.ok(paymentHistoryService.selectYesterdaySum());
+    }
 }
