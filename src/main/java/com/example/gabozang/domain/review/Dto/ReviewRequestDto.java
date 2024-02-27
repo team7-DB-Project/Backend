@@ -13,4 +13,13 @@ public class ReviewRequestDto {
         private String content;
         private double rating;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ReviewReqDateInfo {
+        private String startDate;
+        private String endDate;
+    }
+
 }
