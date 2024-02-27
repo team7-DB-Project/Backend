@@ -1,7 +1,7 @@
 package com.example.gabozang.repository;
 
-import com.example.gabozang.domain.paymentHisotry.Dto.PaymentHistoryRequestDto;
-import com.example.gabozang.domain.paymentHisotry.Dto.PaymentHistoryResponseDto;
+import com.example.gabozang.domain.paymentHisotry.Dto.*;
+import com.example.gabozang.domain.paymentHisotry.Dto.*;
 import com.example.gabozang.domain.review.Dto.ReviewRequestDto;
 import com.example.gabozang.domain.review.Dto.ReviewResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +81,23 @@ public class PaymentHistoryRepository {
         String selectTodaySum = "SELECT sum(sales) FROM payment_history "
                 + "WHERE DAY(created_at) = DAY(NOW()) - 1";
         return this.jdbcTemplate.queryForObject(selectTodaySum, Integer.class);
+    }
+
+    /**
+     * 날짜, 총매출, 면적당 매출 1위, 면적당 매출 2위, 면적당 매출 3위
+     */
+    public List<PaymentHistoryResponseDto.PaymentHistoryAll> selectSumPaymentByDateAndSales(String startDate, String lastDate) {
+        String selectPaymentByDateAndSales = "SELECT s.name, (SUM(s.sales)/maximum_capacity) as sum_sales" +
+                "FROM payment_history ph JOIN store s" +
+                "ON ph.store_id = s.store_id" +
+                "WHERE startDate <= DATE_FORMAT(s.created_at, '%Y-%m-%d') and DATE_FORMAT(s.created_at, '%Y-%m-%d') <= lastDate" +
+                "GROUP BY store_id, created_at " +
+                "ORDER BY (sum_sales / maximum_capacity) DESC";
+        return this.jdbcTemplate.query(selectPaymentByDateAndSales,
+                (rs, rowNum) -> new PaymentHistoryResponseDto.PaymentHistoryAll(
+                        rs.getString("name"),
+                        rs.getDouble("sum_sales")
+                ));
     }
 
 }
