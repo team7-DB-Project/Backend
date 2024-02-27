@@ -1,7 +1,9 @@
 package com.example.gabozang.service;
 
 import com.example.gabozang.domain.review.Dto.ReviewRequestDto.ReviewReqInfo;
+import com.example.gabozang.domain.review.Dto.ReviewRequestDto.ReviewReqDateInfo;
 import com.example.gabozang.domain.review.Dto.ReviewResponseDto.ReviewResInfo;
+import com.example.gabozang.domain.review.Dto.ReviewResponseDto.ReviewRatingInfo;
 import com.example.gabozang.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,4 +30,10 @@ public class ReviewService {
     public List<ReviewResInfo> selectReviewByRating(int rating) {return reviewRepository.selectReviewByRating(rating);}
 
     public List<ReviewResInfo> selectReviewByStoreId(int storeId) { return reviewRepository.selectReviewByStoreId(storeId); }
+
+    public List<ReviewRatingInfo> selectReviewGroupByRating() {return reviewRepository.selectReviewGroupByRating();}
+
+    public List<ReviewResInfo> selectReviewByDate(ReviewReqDateInfo requestDateInfo) {return reviewRepository.selectReviewByDate(requestDateInfo);}
+
+    public List<ReviewResInfo> selectReviewByDateDiff(int month) {return reviewRepository.selectReviewByDateDiff(month);}
 }

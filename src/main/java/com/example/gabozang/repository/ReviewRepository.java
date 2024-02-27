@@ -1,7 +1,9 @@
 package com.example.gabozang.repository;
 
 import com.example.gabozang.domain.review.Dto.ReviewRequestDto.ReviewReqInfo;
+import com.example.gabozang.domain.review.Dto.ReviewRequestDto.ReviewReqDateInfo;
 import com.example.gabozang.domain.review.Dto.ReviewResponseDto.ReviewResInfo;
+import com.example.gabozang.domain.review.Dto.ReviewResponseDto.ReviewRatingInfo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -83,5 +85,42 @@ public class ReviewRepository {
                         rs.getTimestamp("created_at").toLocalDateTime(),
                         rs.getTimestamp("updated_at").toLocalDateTime()
                 ), rating);
+    }
+
+    public List<ReviewRatingInfo> selectReviewGroupByRating() {
+        String selectReviewQuery = "select rating, count(*) as count from review group by rating order by rating desc";
+        return this.jdbcTemplate.query(selectReviewQuery,
+                (rs, rowNum) -> new ReviewRatingInfo(
+                        rs.getInt("rating"),
+                        rs.getInt("count")
+                ));
+    }
+
+    public List<ReviewResInfo> selectReviewByDate(ReviewReqDateInfo requestDateInfo) {
+        String selectReviewQuery = "select * from review where created_at between date(?) and date(?)";
+        String startDate=requestDateInfo.getStartDate();
+        String endDate=requestDateInfo.getEndDate();
+        return this.jdbcTemplate.query(selectReviewQuery,
+                (rs, rowNum) -> new ReviewResInfo(
+                        rs.getInt("review_id"),
+                        rs.getInt("store_id"),
+                        rs.getString("content"),
+                        rs.getDouble("rating"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
+                ), startDate,endDate);
+    }
+
+    public List<ReviewResInfo> selectReviewByDateDiff(int month) {
+        String selectReviewQuery = "SELECT * FROM review WHERE created_at BETWEEN DATE_SUB(NOW(), INTERVAL ? MONTH ) AND NOW()";
+        return this.jdbcTemplate.query(selectReviewQuery,
+                (rs, rowNum) -> new ReviewResInfo(
+                        rs.getInt("review_id"),
+                        rs.getInt("store_id"),
+                        rs.getString("content"),
+                        rs.getDouble("rating"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
+                ), month);
     }
 }

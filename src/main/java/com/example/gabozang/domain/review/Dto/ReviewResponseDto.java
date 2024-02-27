@@ -18,4 +18,12 @@ public class ReviewResponseDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ReviewRatingInfo {
+        private int rating;
+        private int count;
+    }
 }
