@@ -1,6 +1,7 @@
 package com.example.gabozang.repository;
 
 import com.example.gabozang.domain.store.Dto.StoreRequestDto.StoreReqInfo;
+import com.example.gabozang.domain.store.Dto.StoreRequestDto.StoreReqInfo2;
 import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreRankInfo;
 import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreResInfo;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public class StoreRepository {
@@ -22,9 +24,9 @@ public class StoreRepository {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public String insertStore(StoreReqInfo storeReqInfo){
-        String createStoreQuery = "insert into store (name, location, maximum_capacity, rating,image_url, phone_number,created_at, updated_at) VALUES (?,?,?,?,?,?,?,?)"; // 실행될 동적 쿼리문
-        Object[] createUserParams = new Object[]{storeReqInfo.getName(), storeReqInfo.getLocation(), storeReqInfo.getMaximumCapacity(), storeReqInfo.getRating(), storeReqInfo.getImageUrl(),
+    public String insertStore(String imageUrl, StoreReqInfo storeReqInfo){
+        String createStoreQuery = "insert into store (name, location, maximum_capacity, rating, image_url, phone_number,created_at, updated_at) VALUES (?,?,?,?,?,?,?,?)"; // 실행될 동적 쿼리문
+        Object[] createUserParams = new Object[]{storeReqInfo.getName(), storeReqInfo.getLocation(), storeReqInfo.getMaximumCapacity(), storeReqInfo.getRating(), imageUrl,
                 storeReqInfo.getPhoneNumber(), LocalDateTime.now(),LocalDateTime.now()};
         this.jdbcTemplate.update(createStoreQuery, createUserParams);
         return "점포 정보 저장 완료";
@@ -64,7 +66,7 @@ public class StoreRepository {
     }
 
     @Transactional
-    public int updateStoreInfo(int storeId, StoreReqInfo storeReqInfo) {
+    public int updateStoreInfo(int storeId, StoreReqInfo2 storeReqInfo) {
         String updateStoreQuery = "update store set name = ?, location = ?, maximum_capacity = ?, rating = ?, image_url = ?," +
                 " phone_number = ?, updated_at=? where store_id = ?";
         Object[] modifyStoreIdParams = new Object[]{storeReqInfo.getName(), storeReqInfo.getLocation(),

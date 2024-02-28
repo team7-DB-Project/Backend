@@ -1,4 +1,4 @@
-package com.example.gabozang.config;
+package com.example.gabozang.config.webconfig;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

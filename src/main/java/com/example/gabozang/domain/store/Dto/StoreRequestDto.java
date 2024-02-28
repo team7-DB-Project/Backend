@@ -14,6 +14,17 @@ public class StoreRequestDto {
         private String location;
         private int maximumCapacity;
         private double rating;
+        private String phoneNumber;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class StoreReqInfo2 {
+        private String name;
+        private String location;
+        private int maximumCapacity;
+        private double rating;
         private String imageUrl;
         private String phoneNumber;
     }
