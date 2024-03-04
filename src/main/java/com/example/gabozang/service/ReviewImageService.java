@@ -1,4 +1,4 @@
-package com.example.gabozang.service;
+/*package com.example.gabozang.service;
 
 import com.example.gabozang.domain.reviewImage.Dto.ReviewImageRequestDto.ReviewImageReqInfo;
 import com.example.gabozang.repository.ReviewImageRepository;
@@ -12,4 +12,4 @@ public class ReviewImageService {
     public String insertReviewImage(ReviewImageReqInfo reviewImageReqInfo) {
         return reviewImageRepository.insertReviewImage(reviewImageReqInfo);
     }
-}
+}*/

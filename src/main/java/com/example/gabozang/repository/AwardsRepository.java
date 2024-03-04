@@ -29,7 +29,7 @@ public class AwardsRepository {
         String selectAwardsQuery = "select * from awards";
         return this.jdbcTemplate.query(selectAwardsQuery,
                 (rs, rowNum) -> new AwardsResInfo(
-                        rs.getInt("awards_id"),
+                        rs.getInt("award_id"),
                         rs.getInt("store_id"),
                         rs.getInt("ranking"),
                         rs.getTimestamp("created_at").toLocalDateTime(),

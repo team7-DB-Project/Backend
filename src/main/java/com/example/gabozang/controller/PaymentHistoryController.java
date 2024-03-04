@@ -71,16 +71,5 @@ public class PaymentHistoryController {
         return ResponseEntity.ok(paymentHistoryService.selectSumPaymentByDateAndSales(paymentHistoryAllInfo.getStartDate(), paymentHistoryAllInfo.getLastDate()));
     }
 
-    @GetMapping("/period/sums")
-    @Operation(summary = "기간 동안 매출액")
-    public ResponseEntity<List<PaymentHistoryResponseDto.PaymentHistoryAll>> selectSumPaymentByDateAndSales(@RequestBody PaymentHistoryRequestDto.PaymentHistoryAllInfo paymentHistoryAllInfo){
-        return ResponseEntity.ok(paymentHistoryService.selectSumPaymentByDateAndSales(paymentHistoryAllInfo.getStartDate(), paymentHistoryAllInfo.getLastDate()));
-    }
-
-    @GetMapping("/paymentHistoryByDate")
-    @Operation(summary = "기간 내 매출 검색")
-    public ResponseEntity<List<PaymentHistoryResponseDto.PaymentHistorySumResInfo>> SelectPaymentHistoryByDate(@RequestBody PaymentHistoryRequestDto.PaymentHistoryReqDateInfo paymentHistoryReqDateInfo) throws IOException {
-        return ResponseEntity.ok(paymentHistoryService.selectPaymentHistoryByDate(paymentHistoryReqDateInfo));
-    }
 
 }

@@ -1,4 +1,4 @@
-package com.example.gabozang.controller;
+/*package com.example.gabozang.controller;
 import com.example.gabozang.domain.reviewImage.Dto.ReviewImageRequestDto;
 import com.example.gabozang.domain.reviewImage.Dto.ReviewImageRequestDto.ReviewImageReqInfo;
 import com.example.gabozang.domain.reviewImage.Dto.ReviewImageResponseDto.ReviewImageResInfo;
@@ -18,13 +18,11 @@ import org.springframework.web.bind.annotation.*;
 public class ReviewImageController {
     private final ReviewImageService reviewImageService;
 
-    /**
-     * ReviewImage 저장
-     */
+
     @PostMapping("")
     @Operation(summary = "리뷰 이미지 저장")
     public ResponseEntity<String> InsertReviewImage(@RequestBody ReviewImageRequestDto.ReviewImageReqInfo reviewImageReqInfo) throws IOException {
         return ResponseEntity.ok(reviewImageService.insertReviewImage(reviewImageReqInfo));
 
     }
-}
+}*/

@@ -53,7 +53,4 @@ public class PaymentHistoryService {
         return paymentHistoryRepository.selectSumPaymentByDateAndSales(startDate, lastDate);
     }
 
-    public List<PaymentHistoryResponseDto.PaymentHistorySumResInfo> selectPaymentHistoryByDate(PaymentHistoryRequestDto.PaymentHistoryReqDateInfo paymentHistoryReqDateInfo) {
-        return paymentHistoryRepository.selectPaymentHistoryByDate(paymentHistoryReqDateInfo);
-    }
 }
