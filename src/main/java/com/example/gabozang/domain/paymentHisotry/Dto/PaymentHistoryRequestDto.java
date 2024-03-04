@@ -16,4 +16,12 @@ public class PaymentHistoryRequestDto {
         private int paymentId;
         private int storeId;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PaymentHistoryAllInfo {
+        private String startDate;
+        private String lastDate;
+    }
 }

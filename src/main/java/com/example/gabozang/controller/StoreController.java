@@ -1,6 +1,7 @@
 package com.example.gabozang.controller;
 
 import com.example.gabozang.domain.store.Dto.StoreRequestDto.StoreReqInfo;
+import com.example.gabozang.domain.store.Dto.StoreRequestDto.StoreReqInfo2;
 import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreRankInfo;
 import com.example.gabozang.domain.store.Dto.StoreResponseDto.StoreResInfo;
 import com.example.gabozang.service.StoreService;
@@ -11,6 +12,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,8 +25,9 @@ public class StoreController {
      */
     @PostMapping("")
     @Operation(summary = "점포 입력")
-    public ResponseEntity<String> InsertStore(@RequestBody StoreReqInfo storeReqInfo) throws IOException {
-        return ResponseEntity.ok(storeService.insertStore(storeReqInfo));
+    public ResponseEntity<String> InsertStore(@RequestPart(value = "images", required = false) List<MultipartFile> multipartFile,
+            @RequestPart(value = "storeReqInfo") StoreReqInfo storeReqInfo) throws IOException {
+        return ResponseEntity.ok(storeService.insertStore(multipartFile, storeReqInfo));
 
     }
 
@@ -50,8 +53,8 @@ public class StoreController {
      * 특정 점포 정보 수정
      */
     @PostMapping("/{storeId}")
-    @Operation(summary = "특정 점포 정보 수정")
-    public ResponseEntity<Integer> updateStoreById(@PathVariable int storeId, @RequestBody StoreReqInfo storeReqInfo) {
+    @Operation(summary = "특정 점포 정보 수정, 사진 말고 나머지 변경")
+    public ResponseEntity<Integer> updateStoreById(@PathVariable int storeId, @RequestBody StoreReqInfo2 storeReqInfo) {
         return ResponseEntity.ok(storeService.updateStoreById(storeId, storeReqInfo));
     }
 

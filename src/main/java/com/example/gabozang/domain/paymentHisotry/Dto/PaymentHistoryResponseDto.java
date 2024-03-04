@@ -18,4 +18,12 @@ public class PaymentHistoryResponseDto {
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PaymentHistoryAll {
+        private String storeName;
+        private Double sumSales;
+    }
 }
