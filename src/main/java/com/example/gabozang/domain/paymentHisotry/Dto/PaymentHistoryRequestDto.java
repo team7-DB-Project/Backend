@@ -24,4 +24,19 @@ public class PaymentHistoryRequestDto {
         private String startDate;
         private String lastDate;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PaymentHistoryAllInfo {
+        private String startDate;
+        private String lastDate;
+    }
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PaymentHistoryReqDateInfo {
+        private String startDate;
+        private String endDate;
+    }
 }

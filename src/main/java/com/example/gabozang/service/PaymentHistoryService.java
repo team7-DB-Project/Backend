@@ -52,4 +52,8 @@ public class PaymentHistoryService {
     public List<PaymentHistoryResponseDto.PaymentHistoryAll> selectSumPaymentByDateAndSales(String startDate, String lastDate) {
         return paymentHistoryRepository.selectSumPaymentByDateAndSales(startDate, lastDate);
     }
- }
+
+    public List<PaymentHistoryResponseDto.PaymentHistorySumResInfo> selectPaymentHistoryByDate(PaymentHistoryRequestDto.PaymentHistoryReqDateInfo paymentHistoryReqDateInfo) {
+        return paymentHistoryRepository.selectPaymentHistoryByDate(paymentHistoryReqDateInfo);
+    }
+}
