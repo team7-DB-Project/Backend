@@ -2,11 +2,7 @@ package com.example.gabozang.controller;
 
 import com.example.gabozang.domain.paymentHisotry.Dto.PaymentHistoryRequestDto;
 import com.example.gabozang.domain.paymentHisotry.Dto.PaymentHistoryResponseDto;
-import com.example.gabozang.domain.paymentHisotry.PaymentHistory;
-import com.example.gabozang.domain.review.Dto.ReviewRequestDto;
-import com.example.gabozang.domain.review.Dto.ReviewResponseDto;
 import com.example.gabozang.service.PaymentHistoryService;
-import com.example.gabozang.service.ReviewService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -74,5 +70,6 @@ public class PaymentHistoryController {
     public ResponseEntity<List<PaymentHistoryResponseDto.PaymentHistoryAll>> selectSumPaymentByDateAndSales(@RequestBody PaymentHistoryRequestDto.PaymentHistoryAllInfo paymentHistoryAllInfo){
         return ResponseEntity.ok(paymentHistoryService.selectSumPaymentByDateAndSales(paymentHistoryAllInfo.getStartDate(), paymentHistoryAllInfo.getLastDate()));
     }
+
 
 }

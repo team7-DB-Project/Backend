@@ -26,4 +26,13 @@ public class PaymentHistoryResponseDto {
         private String storeName;
         private Double sumSales;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PaymentHistorySumResInfo {
+        private String name;
+        private int sum;
+        private double perPerson;
+    }
 }
