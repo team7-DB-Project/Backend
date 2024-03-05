@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ReviewResponseDto {
     @Getter
@@ -15,6 +16,7 @@ public class ReviewResponseDto {
         private int storeId;
         private String content;
         private double rating;
+        private List<String> imageUrls;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
     }
