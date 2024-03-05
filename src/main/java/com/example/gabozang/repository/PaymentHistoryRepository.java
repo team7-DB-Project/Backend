@@ -84,20 +84,21 @@ public class PaymentHistoryRepository {
     }
 
     /**
-     * 날짜, 총매출, 면적당 매출 1위, 면적당 매출 2위, 면적당 매출 3위
+     * 단위 면적 당 총 매출
      */
+
     public List<PaymentHistoryResponseDto.PaymentHistoryAll> selectSumPaymentByDateAndSales(String startDate, String lastDate) {
-        String selectPaymentByDateAndSales = "SELECT s.name, (SUM(s.sales)/maximum_capacity) as sum_sales" +
-                "FROM payment_history ph JOIN store s" +
-                "ON ph.store_id = s.store_id" +
-                "WHERE startDate <= DATE_FORMAT(s.created_at, '%Y-%m-%d') and DATE_FORMAT(s.created_at, '%Y-%m-%d') <= lastDate" +
-                "GROUP BY store_id, created_at " +
-                "ORDER BY (sum_sales / maximum_capacity) DESC";
+        String selectPaymentByDateAndSales = "SELECT s.name, (SUM(ph.sales)/s.maximum_capacity) as sum_sales " +
+                "FROM payment_history as ph JOIN store as s " +
+                "ON ph.store_id = s.store_id " +
+                "WHERE ph.created_at between date(?) and date(?) " +
+                "GROUP BY ph.store_id " +
+                "ORDER BY SUM(ph.sales)/s.maximum_capacity DESC";
         return this.jdbcTemplate.query(selectPaymentByDateAndSales,
                 (rs, rowNum) -> new PaymentHistoryResponseDto.PaymentHistoryAll(
                         rs.getString("name"),
                         rs.getDouble("sum_sales")
-                ));
+                ),startDate,lastDate);
     }
 
 }

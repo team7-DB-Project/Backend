@@ -66,7 +66,7 @@ public class PaymentHistoryController {
     }
 
     @GetMapping("/period/sums")
-    @Operation(summary = "기간 동안 매출액")
+    @Operation(summary = "기간 동안 면적당 매출 순위")
     public ResponseEntity<List<PaymentHistoryResponseDto.PaymentHistoryAll>> selectSumPaymentByDateAndSales(@RequestBody PaymentHistoryRequestDto.PaymentHistoryAllInfo paymentHistoryAllInfo){
         return ResponseEntity.ok(paymentHistoryService.selectSumPaymentByDateAndSales(paymentHistoryAllInfo.getStartDate(), paymentHistoryAllInfo.getLastDate()));
     }
