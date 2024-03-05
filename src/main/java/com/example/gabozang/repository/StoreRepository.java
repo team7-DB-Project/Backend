@@ -29,7 +29,7 @@ public class StoreRepository {
         Object[] createUserParams = new Object[]{storeReqInfo.getName(), storeReqInfo.getLocation(), storeReqInfo.getMaximumCapacity(), storeReqInfo.getRating(), imageUrl,
                 storeReqInfo.getPhoneNumber(), LocalDateTime.now(),LocalDateTime.now()};
         this.jdbcTemplate.update(createStoreQuery, createUserParams);
-        return "점포 정보 저장 완료";
+        return imageUrl;
     }
 
     public List<StoreResInfo> selectAllStore() {

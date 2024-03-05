@@ -35,12 +35,15 @@ public class ReviewRepository {
 
     public List<ReviewResInfo> selectAllReview() {
         String selectReviewQuery = "select * from review";
+        String selectReviewImageQuery = "select image_url from review_image where review_id = ?";
         return this.jdbcTemplate.query(selectReviewQuery,
                 (rs, rowNum) -> new ReviewResInfo(
                         rs.getInt("review_id"),
                         rs.getInt("store_id"),
                         rs.getString("content"),
                         rs.getDouble("rating"),
+                        this.jdbcTemplate.queryForList(selectReviewImageQuery,
+                                new Object[]{rs.getInt("review_id")}, String.class),
                         rs.getTimestamp("created_at").toLocalDateTime(),
                         rs.getTimestamp("updated_at").toLocalDateTime()
                 ));
@@ -48,12 +51,17 @@ public class ReviewRepository {
 
     public ReviewResInfo selectReviewById(int review_id) {
         String selectReviewQuery = "select * from review where review_id = ?";
+        String selectReviewImageQuery = "select image_url from review_image where review_id = ?";
+        List<String> imageUrls = this.jdbcTemplate.queryForList(selectReviewImageQuery,
+                new Object[]{review_id}, String.class);
+
         return this.jdbcTemplate.queryForObject(selectReviewQuery,
                 (rs, rowNum) -> new ReviewResInfo(
                         rs.getInt("review_id"),
                         rs.getInt("store_id"),
                         rs.getString("content"),
                         rs.getDouble("rating"),
+                        imageUrls,
                         rs.getTimestamp("created_at").toLocalDateTime(),
                         rs.getTimestamp("updated_at").toLocalDateTime()),
                 review_id
@@ -62,12 +70,15 @@ public class ReviewRepository {
 
     public List<ReviewResInfo> selectReviewByStoreId(int storeId) {
         String selectReviewQuery = "select * from review where store_id = ?";
+        String selectReviewImageQuery = "select image_url from review_image where review_id = ?";
         return this.jdbcTemplate.query(selectReviewQuery,
                 (rs, rowNum) -> new ReviewResInfo(
                         rs.getInt("review_id"),
                         rs.getInt("store_id"),
                         rs.getString("content"),
                         rs.getDouble("rating"),
+                        this.jdbcTemplate.queryForList(selectReviewImageQuery,
+                                new Object[]{rs.getInt("review_id")}, String.class),
                         rs.getTimestamp("created_at").toLocalDateTime(),
                         rs.getTimestamp("updated_at").toLocalDateTime()),
                 storeId
@@ -76,12 +87,15 @@ public class ReviewRepository {
 
     public List<ReviewResInfo> selectReviewByRating(int rating) {
         String selectReviewQuery = "select * from review where rating = ?";
+        String selectReviewImageQuery = "select image_url from review_image where review_id = ?";
         return this.jdbcTemplate.query(selectReviewQuery,
                 (rs, rowNum) -> new ReviewResInfo(
                         rs.getInt("review_id"),
                         rs.getInt("store_id"),
                         rs.getString("content"),
                         rs.getDouble("rating"),
+                        this.jdbcTemplate.queryForList(selectReviewImageQuery,
+                                new Object[]{rs.getInt("review_id")}, String.class),
                         rs.getTimestamp("created_at").toLocalDateTime(),
                         rs.getTimestamp("updated_at").toLocalDateTime()
                 ), rating);
@@ -100,12 +114,15 @@ public class ReviewRepository {
         String selectReviewQuery = "select * from review where created_at between date(?) and date(?)";
         String startDate=requestDateInfo.getStartDate();
         String endDate=requestDateInfo.getEndDate();
+        String selectReviewImageQuery = "select image_url from review_image where review_id = ?";
         return this.jdbcTemplate.query(selectReviewQuery,
                 (rs, rowNum) -> new ReviewResInfo(
                         rs.getInt("review_id"),
                         rs.getInt("store_id"),
                         rs.getString("content"),
                         rs.getDouble("rating"),
+                        this.jdbcTemplate.queryForList(selectReviewImageQuery,
+                                new Object[]{rs.getInt("review_id")}, String.class),
                         rs.getTimestamp("created_at").toLocalDateTime(),
                         rs.getTimestamp("updated_at").toLocalDateTime()
                 ), startDate,endDate);
@@ -113,12 +130,15 @@ public class ReviewRepository {
 
     public List<ReviewResInfo> selectReviewByDateDiff(int month) {
         String selectReviewQuery = "SELECT * FROM review WHERE created_at BETWEEN DATE_SUB(NOW(), INTERVAL ? MONTH ) AND NOW()";
+        String selectReviewImageQuery = "select image_url from review_image where review_id = ?";
         return this.jdbcTemplate.query(selectReviewQuery,
                 (rs, rowNum) -> new ReviewResInfo(
                         rs.getInt("review_id"),
                         rs.getInt("store_id"),
                         rs.getString("content"),
                         rs.getDouble("rating"),
+                        this.jdbcTemplate.queryForList(selectReviewImageQuery,
+                                new Object[]{rs.getInt("review_id")}, String.class),
                         rs.getTimestamp("created_at").toLocalDateTime(),
                         rs.getTimestamp("updated_at").toLocalDateTime()
                 ), month);
