@@ -35,4 +35,13 @@ public class PaymentHistoryResponseDto {
         private int sum;
         private double perPerson;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PaymentHistoryCardResInfo {
+        private String name;
+        private int sum;
+        private int count;
+    }
 }
