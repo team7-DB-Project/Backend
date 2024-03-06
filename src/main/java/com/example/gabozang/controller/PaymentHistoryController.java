@@ -71,5 +71,9 @@ public class PaymentHistoryController {
         return ResponseEntity.ok(paymentHistoryService.selectSumPaymentByDateAndSales(paymentHistoryAllInfo.getStartDate(), paymentHistoryAllInfo.getLastDate()));
     }
 
-
+    @GetMapping("/period/card")
+    @Operation(summary = "기간 동안 카드 순위")
+    public ResponseEntity <List<PaymentHistoryResponseDto.PaymentHistoryCardResInfo>> selectCard(@RequestBody PaymentHistoryRequestDto.PaymentHistoryAllInfo paymentHistoryAllInfo) {
+        return ResponseEntity.ok(paymentHistoryService.selectCard(paymentHistoryAllInfo.getStartDate(), paymentHistoryAllInfo.getLastDate()));
+    }
 }
